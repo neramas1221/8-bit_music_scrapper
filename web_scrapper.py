@@ -7,6 +7,8 @@ import re
 import sys
 import time
 from tqdm import tqdm
+import os
+from pathlib import Path
 
 if (len(sys.argv) >= 2):
     page_url   = sys.argv[1] #https://www.vgmusic.com/music/console/nintendo/gameboy/
@@ -34,15 +36,20 @@ if (len(sys.argv) >= 2):
 
     for i in tqdm(range(0,len(files))):
         url =  page_url+str(files[i])
-        print(url)
-        r   = requests.get(url, stream=True)
-        with open(output_loc+str(files[i]), 'wb') as f:
-            for chunk in r.iter_content(chunk_size=1024):
-                if chunk:
-                    f.write(chunk)
-        f.close()
-        time.sleep(1.0)
-
+        #print(output_loc+str(files[i]))
+        exists = os.path.isfile(output_loc+str(files[i]))
+        print(exists)
+        if exists:
+            print("File Exists")
+        else:
+            r   = requests.get(url, stream=True)
+            print("in else")
+            with open(output_loc+str(files[i]), 'wb') as f:
+                for chunk in r.iter_content(chunk_size=1024):
+                    if chunk:
+                        f.write(chunk)
+            f.close()
+            time.sleep(.1)
 
 else:
     print("No URL provided")
