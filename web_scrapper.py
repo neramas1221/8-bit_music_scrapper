@@ -17,7 +17,7 @@ if (len(sys.argv) >= 2):
     table      = soup.find('table')
     a_herf     = table.find_all('a')
     files      = []
-    output_loc = "/home/neramas1221/Git/video_game_music/8-bit/"
+    output_loc = "/home/SOCNET/cwheeler/Git/video_game_music/8_bit/" #"/home/neramas1221/Git/video_game_music/8-bit/"
 
     print(len(a_herf))
     for i in tqdm(range(0,len(a_herf))):
@@ -27,11 +27,11 @@ if (len(sys.argv) >= 2):
             files.append(href)
 
 
-    f = open("/home/neramas1221/Git/video_game_music/8-bit_files.txt", "a")
-    for i in range(0,len(files)):
-            f.write(output_loc+str(files[i]))
-            f.write("\n")
-    f.close()
+#    f = open("/home/SOCNET/cwheeler/Git/video_game_music/8-bit_files.txt", "a")
+#    for i in range(0,len(files)):
+#            f.write(output_loc+str(files[i]))
+#            f.write("\n")
+#    f.close()
 
 
     for i in tqdm(range(0,len(files))):
@@ -43,12 +43,19 @@ if (len(sys.argv) >= 2):
             print("File Exists")
         else:
             r   = requests.get(url, stream=True)
-            print("in else")
             with open(output_loc+str(files[i]), 'wb') as f:
                 for chunk in r.iter_content(chunk_size=1024):
                     if chunk:
                         f.write(chunk)
             f.close()
+
+            f = open("/home/SOCNET/cwheeler/Git/video_game_music/8-bit_files.txt", "a")
+            
+            f.write(output_loc+str(files[i]))
+            f.write("\n")
+            
+            f.close()
+            
             time.sleep(.1)
 
 else:
