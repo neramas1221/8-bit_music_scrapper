@@ -38,9 +38,8 @@ if (len(sys.argv) >= 2):
         url =  page_url+str(files[i])
         #print(output_loc+str(files[i]))
         exists = os.path.isfile(output_loc+str(files[i]))
-        print(exists)
         if exists:
-            print("File Exists")
+            pass
         else:
             r   = requests.get(url, stream=True)
             with open(output_loc+str(files[i]), 'wb') as f:
