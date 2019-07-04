@@ -17,7 +17,7 @@ if (len(sys.argv) >= 2):
     table      = soup.find('table')
     a_herf     = table.find_all('a')
     files      = []
-    output_loc = "/home/SOCNET/cwheeler/Git/video_game_music/8_bit/" #"/home/neramas1221/Git/video_game_music/8-bit/"
+    output_loc = "../video_game_music/8-bit/"
 
     print(len(a_herf))
     for i in tqdm(range(0,len(a_herf))):
@@ -48,7 +48,7 @@ if (len(sys.argv) >= 2):
                         f.write(chunk)
             f.close()
 
-            f = open("/home/SOCNET/cwheeler/Git/video_game_music/8-bit_files.txt", "a")
+            f = open("../video_game_music/8-bit_files.txt", "a")
             
             f.write(output_loc+str(files[i]))
             f.write("\n")
